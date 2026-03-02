@@ -17,7 +17,7 @@ The product represents the top-level product concept (commercial entity). One pr
 - product_key: UUIDv4 unique identifier.
 - name, description, brand;  
 - type: food, beverage, personal_care, household, cleaning, healthcare, childcare, etc; 
-- status: active, inactive 
+- status: active, inactive
 - certificate configuration.
 
 ##### Certificate Configuration
@@ -140,3 +140,6 @@ Maps the specific stock units being moved to the shipment.
 
 ## Audit Trail
 Every change to Products, Product Items, Suppliers, Warehouses, Lots, Stocks, Shipments is captured in an Event Table for auditing.
+
+## API Documentation
+To view API endpoints documentation: https://www.notion.so/Inventory-Management-API-316c7d1fb51380079b75cc3ead59678c?source=copy_link
