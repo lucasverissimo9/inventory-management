@@ -1,0 +1,12 @@
+{
+    "name": "Tony Stark Corp",
+    "company_data": {
+        "email": "admin@acme.com",
+        "address": {
+            "street": "5th Avenue",
+            "city": "New York",
+            "postal_code": "10028",
+            "country": "USA"
+        }
+    }
+}
