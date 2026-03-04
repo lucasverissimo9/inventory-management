@@ -1,6 +1,0 @@
-#Setup environment vars for testing on local environment
-DB_HOST=db
-DB_PORT=5432
-DB_NAME=my_db
-DB_USER=my_user
-DB_PASSWORD=my_pwd

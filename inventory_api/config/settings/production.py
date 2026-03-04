@@ -1,0 +1,6 @@
+from config.settings.base import *
+
+DEBUG = False
+SECURE_HSTS_SECONDS = 31536000
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_CONTENT_TYPE_NOSNIFF = True

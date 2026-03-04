@@ -1,29 +1,42 @@
-
 services:
   db:
-    image: postgres:16
-    environment:
-      POSTGRES_DB: my_db
-      POSTGRES_USER: my_user
-      POSTGRES_PASSWORD: my_pwd
+    image: postgres:16-alpine
     volumes:
-      - /var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data 
+    environment:
+      POSTGRES_DB: ${DB_NAME}         
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
     ports:
-      - "54320:5432"
+      - "5432:5432"
 
-  inventory:
-    build: .
-    container_name: inventory
+  inventory_api:
+    build:
+      context: ./inventory_api
     command: >
-      sh -c "
-      python manage.py makemigrations &&
-      python manage.py migrate &&
-      gunicorn inventory.wsgi:application -c gunicorn.conf.py
-      "
+      sh -c "python manage.py makemigrations && python manage.py migrate &&
+             python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - ./inventory_api:/app
     ports:
-      - "3000:3000"
-    env_file:
-      - env_local.list
+      - "8000:8000"
+    env_file: .env
+    environment:
+      DB_HOST: db 
     depends_on:
       - db
+        
+  inventory_frontend:
+    build:
+      context: ./inventory_web
+      dockerfile: Dockerfile
+    command: npm run dev -- --host
+    volumes:
+      - ./inventory_web:/app
+      - /app/node_modules
+    ports:
+      - "5173:5173"
+    env_file: .env
 
+volumes:
+  postgres_data:  
